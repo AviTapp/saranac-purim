@@ -12,7 +12,7 @@
         $sPhone = filter_input(INPUT_POST,'senderPhone');
         $signed = filter_input(INPUT_POST,'signed');
         /*Incoming Array*/
-        $jews = filter_input(INPUT_POST,'jews'); /*Selected addresses as values*/
+        $jews = filter_input(INPUT_POST,'jews',FILTER_DEFAULT,FILTER_REQUIRE_ARRAY); /*Selected addresses as values*/
         $flippedJews = array_flip($jews); /*Switch names from values into keys*/
         
         /*Locally defined Variables*/
