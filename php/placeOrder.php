@@ -1,10 +1,10 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-<title></title>
-</head>
-<body>
-<?php
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <?php
         /*Incoming Variables*/
         $sName = filter_input(INPUT_POST,'senderName');
         $sEmail = filter_input(INPUT_POST,'senderEmail');
@@ -12,30 +12,18 @@
         $sPhone = filter_input(INPUT_POST,'senderPhone');
         $signed = filter_input(INPUT_POST,'signed');
         /*Incoming Array*/
-        $jewsD = filter_input(INPUT_POST,'jewsD',FILTER_DEFAULT,FILTER_REQUIRE_ARRAY);/*Domestic Array*/
-        $jewsF = filter_input(INPUT_POST,'jewsF',FILTER_DEFAULT,FILTER_REQUIRE_ARRAY);/*Foreign Array*/
-        $jews = array_merge($jewsD, $jewsF);/*Merged Domestic with Foreign*/
-        sort($jews);/*Alphabetically sorted names as values*/
+        $jews = filter_input(INPUT_POST,'jews',FILTER_DEFAULT,FILTER_REQUIRE_ARRAY); /*Selected addresses as values*/
         $flippedJews = array_flip($jews); /*Switch names from values into keys*/
         
         /*Locally defined Variables*/
         $saranacEmail = 'A.Tapp.Creation@gmail.com';
-        $balanceUS = count($jewsD);
-        $balanceNonUS = count($jewsF);
-        $balance = ($balanceUS*5.00)+($balanceNonUS*6.00);
+        $N = count($flippedJews);
+        $balance = $N*5;
         /*Locally defined Array*/
-        
-        $communityCSVd = file("../docs/jewsDomesticRemix.csv");/*Master US List*/
-        foreach ($communityCSVd as $line) {
-            $brokenLine = explode('|', $line);
-            $community[$brokenLine[0]] = $brokenLine[1];
-        }
-        $communityCSVf = file("../docs/jewsForeignRemix.csv");/*Master NonUS List*/
-        foreach ($communityCSVf as $line) {
-            $brokenLine = explode('|', $line);
-            $community[$brokenLine[0]] = $brokenLine[1];
-        }
-        ksort($community);
+        $community = array(); /*Master List of Addresses*/
+        $community["Abramowitz, Mr./Mrs. Phil"] = "177 The Paddock, Williamsville, NY 14221";
+        $community["Alt, Dr./Mrs. Allen"] = "10 Avon Rd., Binghamton, NY 13905";
+        $community["Alt, Mr./Mrs. Robert"] = "281 Middlesex Rd., Buffalo, NY 14216";
         $jewsWithAddresses = array_intersect_key($community, $flippedJews);
         
         /*Send Purim Card Order as an HTML email to sender and to Saranac*/
@@ -52,12 +40,11 @@
         $message .= $balance;
         $message .= "</em></caption><thead></thead><tbody><tr><td><dl>";
         foreach ($jewsWithAddresses as $name => $address) {
-            $message .= "<dt>".$name."</dt><dd>".$address."</dd>";
+            $message .= "<dt>".$name."</dt><dd style='font-size: 50%'>".$address."</dd>";
         }
-        $message .= "</dl></td></tr></tbody></table><h4>Your special message: ".$signed."</h4><h4 style='text-align: center'>Kindly make your check payable to<br><em>Saranac Synagogue Sisterhood</em><br>and send it to:<br><em>100 Delsan Ct., Buffalo, NY 14216</em><br>no later than March 6th, 2015.</h4></body></html>";
+        $message .= "</dl></td></tr></tbody></table><h4 style='text-align: center'>Kindly make your check payable to<br><em>Saranac Synagogue Sisterhood</em><br>and send it to:<br><em>100 Delsan Ct., Buffalo, NY 14216</em><br>no later than March 6th, 2015.</h4></body></html>";
         mail($to, $subject, $message, $headers);
         
-        print $message;
         ?>
-</body>
+    </body>
 </html>
