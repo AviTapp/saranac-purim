@@ -1,10 +1,4 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-<title></title>
-</head>
-<body>
-<?php
+<!DOCTYPE HTML><html><head><title></title></head><body><?php
         /*Incoming Variables*/
         $sName = filter_input(INPUT_POST,'senderName');
         $sEmail = filter_input(INPUT_POST,'senderEmail');
@@ -58,6 +52,4 @@
         mail($to, $subject, $message, $headers);
         
         print $message;
-        ?>
-</body>
-</html>
+        ?></body></html>
