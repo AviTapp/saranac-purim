@@ -5,6 +5,10 @@
         $sAddress = filter_input(INPUT_POST,'senderAddress');
         $sPhone = filter_input(INPUT_POST,'senderPhone');
         $signed = filter_input(INPUT_POST,'signed');
+if ( empty( $sName ) || empty( $sEmail ) || empty( $sAddress ) || empty( $sPhone ) ) {
+                print "Please fill in your contact information and try again.";
+                return;
+} else {
         /*Incoming Array*/
         $jewsD = filter_input(INPUT_POST,'jewsD',FILTER_DEFAULT,FILTER_REQUIRE_ARRAY);/*Domestic Array*/
         $jewsF = filter_input(INPUT_POST,'jewsF',FILTER_DEFAULT,FILTER_REQUIRE_ARRAY);/*Foreign Array*/
@@ -51,5 +55,5 @@
         $message .= "</dl></td></tr></tbody></table><h4>Your special message: ".$signed."</h4><h4 style='text-align: center'>Kindly make your check payable to<br><em>Saranac Synagogue Sisterhood</em><br>and send it to:<br><em>100 Delsan Ct., Buffalo, NY 14216</em><br>no later than March 6th, 2015.</h4></body></html>";
         mail($to, $subject, $message, $headers);
         
-        print $message;
+        print $message;}
         ?></body></html>
