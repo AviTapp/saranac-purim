@@ -11,7 +11,13 @@ if ( empty( $sName ) || empty( $sEmail ) || empty( $sAddress ) || empty( $sPhone
 } else {
         /*Incoming Array*/
         $jewsD = filter_input(INPUT_POST,'jewsD',FILTER_DEFAULT,FILTER_REQUIRE_ARRAY);/*Domestic Array*/
+        if (empty($jewsD)){
+            $jewsD = array();/*In case no Domestic were selected*/
+        }
         $jewsF = filter_input(INPUT_POST,'jewsF',FILTER_DEFAULT,FILTER_REQUIRE_ARRAY);/*Foreign Array*/
+        if (empty($jewsF)){
+            $jewsF = array();/*In case no Foreign were selected*/
+        }
         $jews = array_merge($jewsD, $jewsF);/*Merged Domestic with Foreign*/
         sort($jews);/*Alphabetically sorted names as values*/
         $flippedJews = array_flip($jews); /*Switch names from values into keys*/
