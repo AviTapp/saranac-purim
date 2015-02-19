@@ -5,6 +5,8 @@
 ## Files required to let code work, but ignored because they contain identifying information
 
 *.csv
+*.pdf
+*.xlsx
 
 #################
 ## Eclipse
