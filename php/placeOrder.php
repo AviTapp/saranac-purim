@@ -50,7 +50,7 @@ if ( empty( $sName ) || empty( $sEmail ) || empty( $sAddress ) || empty( $sPhone
         $headers .= "BCC: ".$saranacEmail."\r\n";
         $headers .= "MIME-Version: 1.0\r\n";
         $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-        $message = "<html><body><h1 style='text-align: center'>";
+        $message = "<html lang='en'><head><meta charset='utf-8'></head><body><h1 style='text-align: center'>";
         $message .= $sName."<br>".$sAddress."<br>".$sPhone."<br>";
         $message .= "Saranac Purim Card Order List<br><small style='font-size:0.4em'>Courtesy Of: <u>A Tapp Creation</u> [716-939-1132]</small></h1><table style='margin: 0 auto'><caption style='text-align: right; font-size:1.25em'><em>Your total is $";
         $message .= $balance;
