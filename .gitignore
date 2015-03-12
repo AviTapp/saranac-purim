@@ -7,7 +7,7 @@
 *.csv
 *.pdf
 *.xlsx
-docs/.sync/*
+*.xls
 
 #################
 ## Eclipse
@@ -194,6 +194,8 @@ $RECYCLE.BIN/
 # Mac crap
 .DS_Store
 
+# Sync config file
+docs/.sync/*
 
 #############
 ## Python
